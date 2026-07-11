@@ -5,9 +5,9 @@ public class PlayerInputContext : MonoBehaviour, IInputContext {
 	[SerializeField] PlayerCameraController cameraController;
 
 	public void ProcessInput(InputFrame input) {
-		controller.Move(input.Move);
+		controller.SetMove(input.Move);
 
-		if (input.Jump) controller.Jump();
+		if (input.Jump) controller.SetJump();
 
 		controller.SetSprint(input.Sprint);
 

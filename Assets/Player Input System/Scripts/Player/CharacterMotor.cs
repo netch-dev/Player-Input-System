@@ -31,7 +31,7 @@ public class CharacterMotor : MonoBehaviour {
 		sprinting = sprint;
 	}
 
-	public void Jump() {
+	public void SetJump() {
 		jumpRequested = true;
 	}
 

@@ -3,12 +3,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 	[SerializeField] private CharacterMotor motor;
 
-	public void Move(Vector2 move) {
+	public void SetMove(Vector2 move) {
 		motor.SetMove(move);
 	}
 
-	public void Jump() {
-		motor.Jump();
+	public void SetJump() {
+		motor.SetJump();
 	}
 
 	public void SetSprint(bool sprint) {
