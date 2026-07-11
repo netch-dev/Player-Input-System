@@ -6,21 +6,34 @@ public class VehicleInteractable : MonoBehaviour {
 	[SerializeField] private VehicleInputContext vehicleContext;
 	[SerializeField] private InputContextManager contextManager;
 
-	private bool playerInside;
+	private bool playerInTrigger;
+	private bool playerInVehicle;
 
 	private void OnTriggerEnter(Collider other) {
-		if (other.CompareTag("Player")) playerInside = true;
+		if (other.CompareTag("Player")) playerInTrigger = true;
 	}
 
 	private void OnTriggerExit(Collider other) {
-		if (other.CompareTag("Player")) playerInside = false;
+		if (other.CompareTag("Player")) playerInTrigger = false;
 	}
 
 	private void Update() {
-		if (!playerInside) return;
+		// This should use the Interact input from the InputFrame instead of checking for key presses directly
+		// InputFrame.Interact -> InteractManager -> IInteractable (Vehicle) 
+		if (playerInVehicle) {
+			if (Input.GetKeyDown(KeyCode.E)) {
+				contextManager.Pop();
+				playerInVehicle = false;
+			}
 
-		if (Input.GetKeyDown(KeyCode.E)) {
-			contextManager.SetContext(vehicleContext);
+			return;
+		}
+
+		if (playerInTrigger) {
+			if (Input.GetKeyDown(KeyCode.E)) {
+				contextManager.Push(vehicleContext);
+				playerInVehicle = true;
+			}
 		}
 	}
 }
